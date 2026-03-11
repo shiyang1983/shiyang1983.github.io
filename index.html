@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yangyang Shi - AI Research Scientist</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2a4a7f;
+            --accent: #3182ce;
+            --bg: #f7fafc;
+            --card-bg: #ffffff;
+            --text: #2d3748;
+            --text-light: #718096;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--primary);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        nav .logo {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+            color: #fff;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 4px solid rgba(255,255,255,0.3);
+            overflow: hidden;
+        }
+
+        .hero .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .affiliation {
+            font-size: 1rem;
+            opacity: 0.75;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.6rem 1.4rem;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .hero-links a:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.7);
+        }
+
+        /* Sections */
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-highlights {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+
+        .about-highlights h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .about-highlights ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .about-highlights li {
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .about-highlights li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        /* Research Areas */
+        .research-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .research-card {
+            flex: 0 1 calc(33.333% - 1rem);
+            min-width: 280px;
+        }
+
+        .research-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .research-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .research-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .research-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .research-card p {
+            color: var(--text-light);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* Experience */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent), var(--primary));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.55rem;
+            top: 0.3rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+        }
+
+        .timeline-item .period {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+        }
+
+        .timeline-item .company {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            font-size: 0.93rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .timeline-item ul {
+            margin-top: 0.5rem;
+            padding-left: 1.2rem;
+            font-size: 0.93rem;
+            color: var(--text);
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Publications */
+        .pub-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pub-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: box-shadow 0.2s;
+        }
+
+        .pub-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .pub-item h4 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .pub-item .venue {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .pub-item .description {
+            color: var(--text-light);
+            font-size: 0.88rem;
+            margin-top: 0.4rem;
+            line-height: 1.5;
+        }
+
+        /* Highlights / Awards */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .highlight-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .highlight-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .highlight-card .label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Recent work */
+        .recent-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .recent-card {
+            background: var(--card-bg);
+            padding: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+
+        .recent-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .recent-card h3 {
+            color: var(--primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .recent-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .recent-card .tag {
+            display: inline-block;
+            background: #ebf4ff;
+            color: var(--accent);
+            font-size: 0.78rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            margin-top: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Contact / Footer */
+        footer {
+            background: var(--primary);
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer .footer-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        footer h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        footer .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        footer .contact-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        footer .contact-links a:hover {
+            color: #fff;
+        }
+
+        footer .copyright {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            margin-top: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav ul.active { display: flex; }
+
+            .hero h1 { font-size: 2rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .research-card { flex: 0 1 100%; }
+            .highlights-grid { grid-template-columns: 1fr; }
+            .recent-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 6rem 1rem 3rem; }
+            section { padding: 3rem 1rem; }
+        }
+
+        /* Filter buttons */
+        .filter-btn {
+            padding: 0.4rem 1rem;
+            border: 2px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">Yangyang Shi</div>
+        <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('active')">
+            <span></span><span></span><span></span>
+        </div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#recent">Recent Work</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="avatar"><img src="photo.jpg" alt="Yangyang Shi"></div>
+        <h1>Yangyang Shi</h1>
+        <p class="subtitle">Senior Staff Research Scientist Manager</p>
+        <p class="affiliation">Core AI, Meta Platforms &bull; IEEE Senior Member</p>
+        <div class="hero-links">
+            <a href="https://ai.meta.com/people/1717547132112443/yangyang-shi/">Meta AI</a>
+            <a href="https://scholar.google.com/citations?user=b-zD42MAAAAJ&hl=en">Google Scholar</a>
+            <a href="https://www.linkedin.com/in/yangyang-shi-22403426/">LinkedIn</a>
+            <a href="mailto:shiyang1983@gmail.com">Email</a>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-text">
+        <p>I am a Senior Staff Research Scientist Manager at Meta Platforms, leading a team in Core AI focused on audio, speech, and language technologies. My research interests lie in LLM and generative AI in audio, speech and language domains.</p>
+        <br>
+        <p>I am particularly focused on leveraging LLMs to empower various devices &mdash; such as mobile phones, smartwatches, smart speakers, and AR/VR systems &mdash; with general intelligence. The goal is to enable these devices to understand users and provide contextually aware services.</p>
+    </div>
+</section>
+
+<!-- Research Areas -->
+<section id="research" style="background: #fff;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        <h2 class="section-title">Research Areas</h2>
+        <div class="research-grid">
+            <div class="research-card">
+                <div class="icon">&#127925;</div>
+                <h3>Multimodal Sound & Music Generation</h3>
+                <p>Advancing the integration of sound and music generation with multimodal inputs, deploying capabilities across various product services at Meta Reality Labs.</p>
+            </div>
+            <div class="research-card">
+                <div class="icon">&#128241;</div>
+                <h3>Small Language Models</h3>
+                <p>Enhancing the contextual awareness and efficiency of SLMs to enable next-generation human-AI interaction on edge devices like phones and AR/VR systems.</p>
+            </div>
+            <div class="research-card">
+                <div class="icon">&#129302;</div>
+                <h3>VLMs & VLA for Robotics</h3>
+                <p>Exploring Vision-Language Models and Vision-Language-Action models to empower robotic systems with perceptual and interactive intelligence.</p>
+            </div>
+            <div class="research-card">
+                <div class="icon">&#127908;</div>
+                <h3>Speech Recognition</h3>
+                <p>Pioneered the Emformer architecture for streaming ASR at Facebook AI. Extensive experience in end-to-end models, CTC-based systems, code-switching recognition, and on-device speech processing.</p>
+            </div>
+            <div class="research-card">
+                <div class="icon">&#128269;</div>
+                <h3>Search Ranking</h3>
+                <p>Advanced Bing document ranking with Deep Structured Semantic Models (DSSM), including curriculum training, multilingual word hashing, online feature extraction, and post-caption semantic similarity.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="period">Dec 2021 &ndash; Present</div>
+            <h3>Senior Staff Research Scientist Manager, TLM</h3>
+            <div class="company">Core AI, Meta Platforms &mdash; Seattle</div>
+            <p>Lead a team conducting applied research in audio, speech, and language technologies. Developing innovative foundational models that enable unique and immersive user experiences across Reality Labs products.</p>
+            <ul>
+                <li>Multimodal sound and music generation</li>
+                <li>Small Language Models (MobileLLM) for on-device AI</li>
+                <li>Vision-Language Models for robotics</li>
+            </ul>
+        </div>
+        <div class="timeline-item">
+            <div class="period">Dec 2019 &ndash; Dec 2021</div>
+            <h3>Research Scientist</h3>
+            <div class="company">AI Speech, Facebook AI &mdash; Seattle</div>
+            <p>Led v-team to innovate and apply transformers to speech recognition. Proposed the Emformer architecture, applied to all speech recognition surfaces for server and device, achieving significant accuracy, RTF, and latency improvements.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="period">Nov 2017 &ndash; Dec 2019</div>
+            <h3>Senior Applied Scientist</h3>
+            <div class="company">Mobvoi AI Lab &mdash; Seattle</div>
+            <p>Production and advanced ASR systems. Won 1st prize in ASRU 2019 Code-Switch Challenge (2 tracks out of 71 teams). Published work on high-rank LSTM-CTC models and knowledge distillation at ICASSP 2019.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="period">May 2016 &ndash; Nov 2017</div>
+            <h3>Data and Applied Scientist II</h3>
+            <div class="company">Microsoft, Core Web Relevance &mdash; Redmond</div>
+            <p>Advanced core relevance technology with deep learning. Improved DSSM-based ranking for Bing across multiple languages including Chinese, Korean, Japanese, and European languages.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="period">Nov 2013 &ndash; May 2016</div>
+            <h3>NLP Scientist</h3>
+            <div class="company">Microsoft China &mdash; Suzhou</div>
+            <p>Advanced Language Understanding and locale expansion for Cortana. Deployed RNN-based slot tagging and contextual SLU systems to production across multiple locales (zh-cn, fr-fr, it-it, de-de, es-es).</p>
+        </div>
+    </div>
+</section>
+
+<!-- Publications -->
+<section id="publications">
+    <h2 class="section-title">Publications</h2>
+
+    <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2rem;">
+        <button class="filter-btn active" onclick="filterPubs('all')">All</button>
+        <button class="filter-btn" onclick="filterPubs('2025-2026')">2025&ndash;2026</button>
+        <button class="filter-btn" onclick="filterPubs('2023-2024')">2023&ndash;2024</button>
+        <button class="filter-btn" onclick="filterPubs('2021-2022')">2021&ndash;2022</button>
+        <button class="filter-btn" onclick="filterPubs('2019-2020')">2019&ndash;2020</button>
+        <button class="filter-btn" onclick="filterPubs('2012-2018')">2012&ndash;2018</button>
+    </div>
+
+    <div class="pub-list">
+
+        <!-- 2026 -->
+        <div class="pub-item" data-year="2025-2026">
+            <h4>Neural Computers</h4>
+            <div class="venue">ICLR 2026 Workshop on World Models</div>
+        </div>
+        <div class="pub-item" data-year="2025-2026">
+            <h4>MobileLLM-R1: Exploring the Limits of Sub-Billion Language Model Reasoners with Open Training Recipes</h4>
+            <div class="venue">ICLR 2026</div>
+        </div>
+        <div class="pub-item" data-year="2025-2026">
+            <h4>DepthLM: Metric Depth from Vision Language Models</h4>
+            <div class="venue">ICLR 2026 (Oral)</div>
+        </div>
+        <div class="pub-item" data-year="2025-2026">
+            <h4>Know When to Fold 'Em: Predicting an LLM-Judge for Efficient but Performant Inference</h4>
+            <div class="venue">ICLR 2026</div>
+        </div>
+
+        <!-- 2025 -->
+        <div class="pub-item" data-year="2025-2026">
+            <h4>MASV: Speaker Verification with Global and Local Context Mamba</h4>
+            <div class="venue">InterSpeech 2025</div>
+        </div>
+        <div class="pub-item" data-year="2025-2026">
+            <h4>ParetoQ: Scaling Laws in Extremely Low-bit LLM Quantization</h4>
+            <div class="venue">arXiv 2025</div>
+        </div>
+        <div class="pub-item" data-year="2025-2026">
+            <h4>Breaking Down Power Barriers in On-Device Streaming ASR</h4>
+            <div class="venue">NAACL 2025 Industry Track</div>
+        </div>
+        <div class="pub-item" data-year="2025-2026">
+            <h4>Self-Vocabularizing Training for Neural Machine Translation</h4>
+            <div class="venue">NAACL 2025 Student Research Workshop</div>
+        </div>
+        <div class="pub-item" data-year="2025-2026">
+            <h4>Streamlining Language Models via Semantic Basis Analysis</h4>
+            <div class="venue">TMLR 2025</div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="pub-item" data-year="2023-2024">
+            <h4>Agent-as-a-Judge: Evaluate Agents with Agents</h4>
+            <div class="venue">ICML 2025 (arXiv 2024)</div>
+        </div>
+        <div class="pub-item" data-year="2023-2024">
+            <h4>MobileLLM: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases</h4>
+            <div class="venue">ICML 2024</div>
+        </div>
+        <div class="pub-item" data-year="2023-2024">
+            <h4>Speech ReaLLM &ndash; Real-time Streaming Speech Recognition with Multimodal LLMs by Teaching the Flow of Time</h4>
+            <div class="venue">ICML 2024</div>
+        </div>
+        <div class="pub-item" data-year="2023-2024">
+            <h4>Scaling Parameter-Constrained Language Models with Quality Data</h4>
+            <div class="venue">EMNLP 2024 Industry Track</div>
+        </div>
+
+        <!-- 2023 -->
+        <div class="pub-item" data-year="2023-2024">
+            <h4>LLM-QAT: Data-Free Quantization Aware Training for Large Language Models</h4>
+            <div class="venue">ACL 2024 Findings &middot; 334 citations</div>
+        </div>
+        <div class="pub-item" data-year="2023-2024">
+            <h4>Towards Zero-Shot Multilingual Transfer for Code-Switched Responses</h4>
+            <div class="venue">ACL 2023</div>
+        </div>
+        <div class="pub-item" data-year="2023-2024">
+            <h4>Multi-Head State Space Model for Speech Recognition</h4>
+            <div class="venue">InterSpeech 2023</div>
+        </div>
+        <div class="pub-item" data-year="2023-2024">
+            <h4>Binary and Ternary Natural Language Generation</h4>
+            <div class="venue">ACL 2023</div>
+        </div>
+        <div class="pub-item" data-year="2023-2024">
+            <h4>TorchAudio 2.1: Advancing Speech Recognition, Self-Supervised Learning, and Audio Processing Components for PyTorch</h4>
+            <div class="venue">ASRU 2023</div>
+        </div>
+
+        <!-- 2022 -->
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Streaming Parallel Transducer Beam Search with Fast-Slow Cascaded Encoders</h4>
+            <div class="venue">InterSpeech 2022</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>LiCo-Net: Linearized Convolution Network for Hardware-efficient Keyword Spotting</h4>
+            <div class="venue">arXiv 2022</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Learning a Dual-Mode Speech Recognition Model via Self-Pruning</h4>
+            <div class="venue">SLT Workshop 2022</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Improving Fast-Slow Encoder Based Transducer with Streaming Deliberation</h4>
+            <div class="venue">ICASSP 2023</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>SCA: Streaming Cross-Attention Alignment for Echo Cancellation</h4>
+            <div class="venue">ICASSP 2022</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Biased Self-supervised Learning for ASR</h4>
+            <div class="venue">InterSpeech 2022</div>
+        </div>
+
+        <!-- 2021 -->
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Emformer: Efficient Memory Transformer Based Acoustic Model for Low Latency Streaming Speech Recognition</h4>
+            <div class="venue">ICASSP 2021 &middot; 198 citations</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Torchaudio: Building Blocks for Audio and Speech Processing</h4>
+            <div class="venue">ICASSP 2021 &middot; 197 citations</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Contextualized Streaming End-to-End Speech Recognition with Trie-Based Deep Biasing and Shallow Fusion</h4>
+            <div class="venue">InterSpeech 2021 &middot; 125 citations</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Transformer in Action: A Comparative Study of Transformer-Based Acoustic Models for Large Scale Speech Recognition Applications</h4>
+            <div class="venue">ICASSP 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Streaming Transformer Transducer Based Speech Recognition Using Non-Causal Convolution</h4>
+            <div class="venue">ICASSP 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Dissecting User-Perceived Latency of On-Device E2E Speech Recognition</h4>
+            <div class="venue">InterSpeech 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Transformer-Based Acoustic Modeling for Streaming Speech Synthesis</h4>
+            <div class="venue">InterSpeech 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Dynamic Encoder Transducer: A Flexible Solution for Trading Off Accuracy for Latency</h4>
+            <div class="venue">InterSpeech 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Flexi-Transducer: Optimizing Latency, Accuracy and Compute for Multi-Domain On-Device Scenarios</h4>
+            <div class="venue">InterSpeech 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Collaborative Training of Acoustic Encoders for Speech Recognition</h4>
+            <div class="venue">InterSpeech 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>On Lattice-Free Boosted MMI Training of HMM and CTC-Based Full-Context ASR Models</h4>
+            <div class="venue">ASRU 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Streaming Attention-Based Models with Augmented Memory for End-To-End Speech Recognition</h4>
+            <div class="venue">SLT 2021</div>
+        </div>
+        <div class="pub-item" data-year="2021-2022">
+            <h4>Transferring Voice Knowledge for Acoustic Event Detection: An Empirical Study</h4>
+            <div class="venue">arXiv 2021</div>
+        </div>
+
+        <!-- 2020 -->
+        <div class="pub-item" data-year="2019-2020">
+            <h4>Streaming Transformer-based Acoustic Models Using Self-attention with Augmented Memory</h4>
+            <div class="venue">InterSpeech 2020 &middot; 64 citations</div>
+        </div>
+        <div class="pub-item" data-year="2019-2020">
+            <h4>Mining Effective Negative Training Samples for Keyword Spotting</h4>
+            <div class="venue">ICASSP 2020</div>
+        </div>
+        <div class="pub-item" data-year="2019-2020">
+            <h4>Weak-Attention Suppression for Transformer Based Speech Recognition</h4>
+            <div class="venue">InterSpeech 2020</div>
+        </div>
+        <div class="pub-item" data-year="2019-2020">
+            <h4>Wake Word Detection with Streaming Transformers</h4>
+            <div class="venue">ICASSP 2021 (arXiv 2020)</div>
+        </div>
+
+        <!-- 2019 -->
+        <div class="pub-item" data-year="2019-2020">
+            <h4>End-To-End Speech Recognition Using a High Rank LSTM-CTC Based Model</h4>
+            <div class="venue">ICASSP 2019</div>
+        </div>
+        <div class="pub-item" data-year="2019-2020">
+            <h4>Knowledge Distillation for Recurrent Neural Network Language Modeling with Trust Regularization</h4>
+            <div class="venue">ICASSP 2019</div>
+        </div>
+        <div class="pub-item" data-year="2019-2020">
+            <h4>Region Proposal Network Based Small-Footprint Keyword Spotting</h4>
+            <div class="venue">IEEE Signal Processing Letters, 2019 &middot; 30 citations</div>
+        </div>
+
+        <!-- 2016 -->
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Recurrent Support Vector Machines for Slot Tagging in Spoken Language Understanding</h4>
+            <div class="venue">HLT-NAACL 2016</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Deep LSTM Based Feature Mapping for Query Classification</h4>
+            <div class="venue">HLT-NAACL 2016</div>
+        </div>
+
+        <!-- 2015 -->
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Semi-Supervised Slot Tagging in Spoken Language Understanding using Recurrent Transductive Support Vector Machines</h4>
+            <div class="venue">ASRU 2015</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Contextual Spoken Language Understanding using Recurrent Neural Networks</h4>
+            <div class="venue">ICASSP 2015</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>A Factorization Network Based Method for Multi-lingual Domain Classification</h4>
+            <div class="venue">ICASSP 2015</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>RNN-based Labeled Data Generation for Spoken Language Understanding</h4>
+            <div class="venue">InterSpeech 2015</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Recurrent Neural Network Language Model Adaptation with Curriculum Learning</h4>
+            <div class="venue">Computer Speech &amp; Language, 2015</div>
+        </div>
+
+        <!-- 2014 -->
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Cluster Based Chinese Abbreviation Modeling</h4>
+            <div class="venue">InterSpeech 2014</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Integrating Meta-information into Recurrent Neural Network Language Models</h4>
+            <div class="venue">Speech Communication, 2014</div>
+        </div>
+
+        <!-- 2013 -->
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Recurrent Neural Networks for Language Understanding</h4>
+            <div class="venue">InterSpeech 2013</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Speed Up of Recurrent Neural Network Language Models with Sentence Independent Subsampling Stochastic Gradient Descent</h4>
+            <div class="venue">InterSpeech 2013</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Exploiting the Succeeding Words in Recurrent Neural Network Language Models</h4>
+            <div class="venue">InterSpeech 2013</div>
+        </div>
+        <div class="pub-item" data-year="2012-2018">
+            <h4>K-component Recurrent Neural Network Language Models using Curriculum Learning</h4>
+            <div class="venue">ASRU 2013</div>
+        </div>
+
+        <!-- 2012 -->
+        <div class="pub-item" data-year="2012-2018">
+            <h4>Towards Recurrent Neural Networks Language Models with Linguistic and Contextual Features</h4>
+            <div class="venue">InterSpeech 2012</div>
+        </div>
+
+    </div>
+    <p style="margin-top: 1.5rem; text-align: center;">
+        <a href="https://scholar.google.com/citations?user=b-zD42MAAAAJ&hl=en" style="color: var(--accent); text-decoration: none; font-weight: 600;">View full list on Google Scholar &rarr;</a>
+    </p>
+</section>
+
+<!-- Recent Work -->
+<section id="recent" style="background: #fff;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        <h2 class="section-title">Recent Highlights</h2>
+        <div class="recent-grid">
+            <div class="recent-card">
+                <h3>MobileLLM-R1.5</h3>
+                <p>A sub-billion parameter reasoning model that beats DeepSeek-R1-Distill-Qwen-1.5B on all math & coding benchmarks with ~40% fewer parameters.</p>
+                <span class="tag">On-Device AI</span>
+            </div>
+            <div class="recent-card">
+                <h3>DepthLM</h3>
+                <p>Vision-language models for spatial intelligence tasks, enabling depth understanding and 3D awareness in language models.</p>
+                <span class="tag">Vision-Language</span>
+            </div>
+            <div class="recent-card">
+                <h3>MobileLLM-R1</h3>
+                <p>Open-source reasoning models with training recipes and data sources for efficient on-device language model inference.</p>
+                <span class="tag">Open Source</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <h2>Get In Touch</h2>
+        <div class="contact-links">
+            <a href="mailto:shiyang1983@gmail.com">shiyang1983@gmail.com</a>
+            <a href="https://scholar.google.com/citations?user=b-zD42MAAAAJ&hl=en">Google Scholar</a>
+            <a href="https://www.linkedin.com/in/yangyang-shi-22403426/">LinkedIn</a>
+        </div>
+        <p class="copyright">&copy; 2026 Yangyang Shi. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function filterPubs(year) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.pub-item').forEach(item => {
+        if (year === 'all' || item.dataset.year === year) {
+            item.style.display = '';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+</script>
+
+</body>
+</html>
